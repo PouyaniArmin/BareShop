@@ -35,7 +35,14 @@
           <td class="px-4 py-2 text-sm text-gray-700">Active</td>
           <td class="px-4 py-2 text-sm text-gray-700">
             <button class="px-3 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-700">Edit</button>
-            <button class="ml-2 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Delete</button>
+            <!-- Delete Button with Form -->
+            <form method="POST" action="#" style="display:inline;">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="ml-2 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">
+                Delete
+              </button>
+            </form>
           </td>
         </tr>
         <tr class="border-b">
@@ -46,7 +53,14 @@
           <td class="px-4 py-2 text-sm text-gray-700">Inactive</td>
           <td class="px-4 py-2 text-sm text-gray-700">
             <button class="px-3 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-700">Edit</button>
-            <button class="ml-2 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Delete</button>
+            <!-- Delete Button with Form -->
+            <form method="POST" action="#" style="display:inline;">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="ml-2 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">
+                Delete
+              </button>
+            </form>
           </td>
         </tr>
         <tr class="border-b">
@@ -57,7 +71,14 @@
           <td class="px-4 py-2 text-sm text-gray-700">Active</td>
           <td class="px-4 py-2 text-sm text-gray-700">
             <button class="px-3 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-700">Edit</button>
-            <button class="ml-2 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">Delete</button>
+            <!-- Delete Button with Form -->
+            <form method="POST" action="#" style="display:inline;">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="ml-2 px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">
+                Delete
+              </button>
+            </form>
           </td>
         </tr>
       </tbody>
