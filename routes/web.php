@@ -4,10 +4,33 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',[HomeController::class,'index']);
-// register & login
-Route::get('/register',[AuthController::class,'register']);
-Route::post('/register',[AuthController::class,'store']);
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/login',[AuthController::class,'login']);
-Route::Post('/login',[AuthController::class,'authenticate']);
+// register & login
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'store']);
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate']);
+
+// Email verification routes
+Route::get('email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+// Route to handle email verification with user ID and hash
+Route::get('email/verify/{id}/{hash}', function ($id, $hash) {
+    $user = \App\Models\User::findOrFail($id);
+
+    // Check if the hash matches the email's hashed version
+    if (hash_equals($hash, sha1($user->email))) {
+        $user->markEmailAsVerified();
+    }
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Home route that requires email verification
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');

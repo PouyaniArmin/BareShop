@@ -25,6 +25,8 @@ class AuthController extends Controller
         $user->email = $validate['email'];
         $user->password = bcrypt($validate['password']);
         $user->save();
+        Auth::login($user);
+        $user->sendEmailVerificationNotification();
         echo "create your account please check email address ";
         exit;
     }
