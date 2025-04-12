@@ -16,6 +16,7 @@
     <main class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
       <section class="flex w-[30rem] flex-col space-y-10">
         <div class="text-center text-4xl font-medium">Log In</div>
+
         <!-- Alert Messages -->
         @if ($errors->any())
         <div class="max-w-4xl mx-auto" id="alertBox">
@@ -64,6 +65,11 @@
           LOG IN
         </button>
 
+        <!-- Google Login Button -->
+        <a href="{{ route('login.google') }}" class="transform rounded-sm bg-red-600 py-2 font-bold text-white duration-300 hover:bg-red-400 text-center mt-4">
+          Login with Google
+        </a>
+
         <a href="#" class="transform text-center font-semibold text-gray-500 duration-300 hover:text-gray-300">FORGOT PASSWORD?</a>
 
         <p class="text-center text-lg">
@@ -79,9 +85,6 @@
     function closeAlert() {
       document.getElementById("alertBox").style.display = "none";
     }
-
-    // You can add a condition to show the alert here (for example, if there was an error)
-    // document.getElementById("alertBox").style.display = "block"; // Uncomment to test the alert
   </script>
 </body>
 

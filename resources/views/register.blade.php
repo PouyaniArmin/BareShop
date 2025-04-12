@@ -95,6 +95,11 @@
                     SIGN UP
                 </button>
 
+                <!-- Google Sign-Up Button -->
+                <a href="{{ route('login.google') }}" class="w-full transform rounded-sm bg-red-600 py-2 font-bold text-center duration-300 hover:bg-red-400">
+                    Sign Up with Google
+                </a>
+
                 <p class="text-center text-lg">
                     Already have an account?
                     <a href="{{ url('/login') }}" class="font-medium text-indigo-500 underline-offset-4 hover:underline">Log In</a>

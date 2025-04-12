@@ -21,12 +21,10 @@ Route::get('email/verify', function () {
 // Route to handle email verification with user ID and hash
 Route::get('email/verify/{id}/{hash}', function ($id, $hash) {
     $user = \App\Models\User::findOrFail($id);
-
     // Check if the hash matches the email's hashed version
     if (hash_equals($hash, sha1($user->email))) {
         $user->markEmailAsVerified();
     }
-
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
@@ -34,3 +32,6 @@ Route::get('email/verify/{id}/{hash}', function ($id, $hash) {
 Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
+
+Route::get('login/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [AuthController::class, 'handleGoogleCallback']);
