@@ -74,7 +74,7 @@
           Login with Google
         </a>
 
-        <a href="#" class="transform text-center font-semibold text-gray-500 duration-300 hover:text-gray-300">FORGOT PASSWORD?</a>
+        <a href="{{route('password.request')}}" class="transform text-center font-semibold text-gray-500 duration-300 hover:text-gray-300">FORGOT PASSWORD?</a>
 
         <p class="text-center text-lg">
           No account?

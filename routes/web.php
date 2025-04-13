@@ -35,3 +35,9 @@ Route::get('/home', function () {
 
 Route::get('login/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [AuthController::class, 'handleGoogleCallback']);
+// Forget Password
+Route::get('/forgot-password',[AuthController::class,'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('rest-password/{token}',[AuthController::class,'showResetForm'])->name('password.reset');
+Route::post('rest-password',[AuthController::class,'rest'])->name('password.update');

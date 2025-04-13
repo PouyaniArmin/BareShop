@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use App\Rules\ReCaptcha;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password as PasswordRule;
 
 class AuthController extends Controller
 {
@@ -92,6 +95,50 @@ class AuthController extends Controller
                 ]);
             }
         }
+    }
 
+    public function showLinkRequestForm()
+    {
+        return view('forget-password');
+    }
+    public function sendResetLinkEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $response = Password::sendResetLink(
+            $request->only('email')
+        );
+        if ($response == Password::RESET_LINK_SENT) {
+            return back()->with('status', 'We have e-mailed your password reset link!');
+        } else {
+            return back()->withErrors(['email' => 'Unable to send password reset link.']);
+        }
+    }
+    public function showResetForm($token)
+    {
+        return view('reset-password', ['token' => $token]);
+    }
+    public function rest(Request $request)
+    {
+        $validate = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', PasswordRule::min(6)],
+            'password_confirmation' => ['required'],
+            'token' => ['required'],
+        ]);
+        $response = Password::reset($validate, function ($user) use ($request) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+        });
+        if ($response == Password::PASSWORD_RESET) {
+            return redirect()->route('login')->with('status', 'Your password has been reset!');
+        } else {
+            return back()->withErrors(['email' => [trans($response)]]);
+        }
     }
 }
