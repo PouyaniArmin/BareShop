@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BareShop - Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -90,6 +91,9 @@
                         class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                 </div>
 
+                <!-- reCAPTCHA -->
+                <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div>
+
                 <!-- Sign Up Button -->
                 <button class="w-full transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
                     SIGN UP
@@ -107,6 +111,7 @@
             </section>
         </main>
     </form>
+
     <script>
         function closeAlert() {
             document.getElementById("alertBox").style.display = "none";

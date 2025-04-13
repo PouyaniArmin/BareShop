@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use App\Rules\ReCaptcha;
 
 class AuthController extends Controller
 {
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required',
+            'g-recaptcha-response' => [new ReCaptcha],
         ]);
         $user = new User();
         $user->name = $validate['name'];
@@ -59,36 +61,37 @@ class AuthController extends Controller
     }
 
     public function authenticate(Request $request)
-{
-    if (strpos($request->email, 'google.com') !== false) {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            Auth::login($user);
-            echo "Login successful with Google";
-            exit;
-        } else {
-            return back()->withErrors(['email' => 'No user found with this email.']);
-        }
-    } else {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            echo "Login successful with regular credentials";
-            exit;
-        } else {
-            return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+    {
+        if (strpos($request->email, 'google.com') !== false) {
+            $request->validate([
+                'email' => 'required|email',
             ]);
-        }
-    }
-}
 
+            $user = User::where('email', $request->email)->first();
+            if ($user) {
+                Auth::login($user);
+                echo "Login successful with Google";
+                exit;
+            } else {
+                return back()->withErrors(['email' => 'No user found with this email.']);
+            }
+        } else {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+                'g-recaptcha-response' => [new ReCaptcha]
+            ]);
+
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                echo "Login successful with regular credentials";
+                exit;
+            } else {
+                return back()->withErrors([
+                    'email' => 'The provided credentials do not match our records.',
+                ]);
+            }
+        }
+
+    }
 }

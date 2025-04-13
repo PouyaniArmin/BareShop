@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BareShop</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
   <!-- page -->
-  <form action="" method="POST">
+  <form action="{{ url('/login') }}" method="POST">
     @csrf <!-- CSRF Token -->
 
     <main class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
@@ -61,6 +62,9 @@
           <input type="password" name="password" placeholder="Password" class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
         </div>
 
+        <!-- reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div>
+
         <button type="submit" class="transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
           LOG IN
         </button>
@@ -74,18 +78,18 @@
 
         <p class="text-center text-lg">
           No account?
-          <a href="#" class="font-medium text-indigo-500 underline-offset-4 hover:underline">Create One</a>
+          <a href="{{ url('/register') }}" class="font-medium text-indigo-500 underline-offset-4 hover:underline">Create One</a>
         </p>
       </section>
     </main>
   </form>
-
   <script>
     // Close alert function
     function closeAlert() {
       document.getElementById("alertBox").style.display = "none";
     }
   </script>
+
 </body>
 
 </html>
