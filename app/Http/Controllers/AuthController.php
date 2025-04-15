@@ -32,6 +32,7 @@ class AuthController extends Controller
         $user->name = $validate['name'];
         $user->email = $validate['email'];
         $user->password = bcrypt($validate['password']);
+        $user->role_id=1;
         $user->save();
         Auth::login($user);
         $user->sendEmailVerificationNotification();
@@ -54,9 +55,7 @@ class AuthController extends Controller
             ]
         );
         Auth::login($user);
-        // return redirect()->to('/');
-        echo "Login successful with Google";
-        exit;
+        return redirect()->intended('panel/dashboard');
     }
     public function login()
     {
@@ -73,8 +72,7 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             if ($user) {
                 Auth::login($user);
-                echo "Login successful with Google";
-                exit;
+                return redirect()->intended('dashboard');
             } else {
                 return back()->withErrors(['email' => 'No user found with this email.']);
             }
@@ -87,8 +85,7 @@ class AuthController extends Controller
 
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
-                echo "Login successful with regular credentials";
-                exit;
+                return redirect()->intended('dashboard');
             } else {
                 return back()->withErrors([
                     'email' => 'The provided credentials do not match our records.',
