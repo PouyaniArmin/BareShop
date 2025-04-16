@@ -17,7 +17,7 @@
             <h1 class="text-white text-xl font-semibold">Admin Panel</h1>
         </div>
         <div class="flex items-center space-x-4">
-            <span class="text-gray-300">Welcome</span>
+            <span class="text-gray-300">{{$user->name}}</span>
             <i class="fas fa-user-circle text-gray-300 text-2xl"></i>
         </div>
     </nav>
@@ -98,15 +98,18 @@
                             </div>
                         </div>
                     </li>
-
                     <li>
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
-                            <div class="flex items-center">
-                                <i class="fas fa-sign-out-alt mr-2"></i>
-                                <span>Logout</span>
-                            </div>
-                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                                <div class="flex items-center">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    <span>Logout</span>
+                                </div>
+                            </button>
+                        </form>
                     </li>
+
 
 
                 </ul>

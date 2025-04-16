@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -43,4 +44,10 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('rest-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('rest-password', [AuthController::class, 'rest'])->name('password.update');
 // dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:admin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:admin,seller');
+
+// logout
+Route::post('/logout',function(){
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
