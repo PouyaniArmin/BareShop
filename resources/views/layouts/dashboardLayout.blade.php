@@ -41,13 +41,14 @@
 
                     <!-- Users -->
                     <li class="opcion-con-desplegable">
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                        <a href="{{ route('users') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
                             <div class="flex items-center">
                                 <i class="fas fa-users mr-2"></i>
                                 <span>User Management</span>
                             </div>
-                        </div>
+                        </a>
                     </li>
+
 
                     <!-- Products -->
                     <li class="opcion-con-desplegable">

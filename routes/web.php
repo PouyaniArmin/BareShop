@@ -50,7 +50,8 @@ Route::post('rest-password', [AuthController::class, 'rest'])->name('password.up
 
 Route::middleware(['role:admin,seller'])->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::get('/dashboard/users', [UserManagementController::class, 'index']);
+    // users
+    Route::get('/dashboard/users', [UserManagementController::class, 'index'])->name('users');
     Route::get('/dashboard/users/{id}/edit', [UserManagementController::class, 'editUser'])->name('users.edit');
     Route::patch('/dashboard/users/{id}', [UserManagementController::class, 'updateUser'])->name('users.update');
     Route::delete('/dashboard/users/{id}', [UserManagementController::class, 'deleteUser'])->name('users.destroy');
