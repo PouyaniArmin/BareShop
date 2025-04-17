@@ -52,14 +52,13 @@
 
                     <!-- Products -->
                     <li class="opcion-con-desplegable">
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                        <a href="{{ route('product') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
                             <div class="flex items-center">
                                 <i class="fas fa-cogs mr-2"></i>
                                 <span>Product Management</span>
                             </div>
-                        </div>
+                        </a>
                     </li>
-
                     <!-- Orders -->
                     <li class="opcion-con-desplegable">
                         <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">

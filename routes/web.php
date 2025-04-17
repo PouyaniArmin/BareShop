@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,10 @@ Route::middleware(['role:admin,seller'])->group(function(){
     Route::get('/dashboard/users/{id}/edit', [UserManagementController::class, 'editUser'])->name('users.edit');
     Route::patch('/dashboard/users/{id}', [UserManagementController::class, 'updateUser'])->name('users.update');
     Route::delete('/dashboard/users/{id}', [UserManagementController::class, 'deleteUser'])->name('users.destroy');
+    // products
+    Route::get('/dashboard/products', [ProductManagementController::class, 'index'])->name('product');
+    Route::get('/dashboard/products/create', [ProductManagementController::class, 'create'])->name('product.create');
+    
 });
 // logout
 Route::post('/logout',function(){
