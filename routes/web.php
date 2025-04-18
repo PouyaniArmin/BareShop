@@ -49,7 +49,7 @@ Route::post('rest-password', [AuthController::class, 'rest'])->name('password.up
 // dashboard
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:admin,seller');
 
-Route::middleware(['role:admin,seller'])->group(function(){
+Route::middleware(['role:admin,seller'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     // users
     Route::get('/dashboard/users', [UserManagementController::class, 'index'])->name('users');
@@ -59,10 +59,13 @@ Route::middleware(['role:admin,seller'])->group(function(){
     // products
     Route::get('/dashboard/products', [ProductManagementController::class, 'index'])->name('product');
     Route::get('/dashboard/products/create', [ProductManagementController::class, 'create'])->name('product.create');
-    
+    Route::post('/dashboard/products/store', [ProductManagementController::class, 'store'])->name('products.store');
+    Route::get('products/{id}/edit', [ProductManagementController::class, 'edit'])->name('products.edit');
+    Route::patch('products/update/{id}', [ProductManagementController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}',[ProductManagementController::class,'destroy'])->name('products.destroy');
 });
 // logout
-Route::post('/logout',function(){
+Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
