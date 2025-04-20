@@ -59,6 +59,16 @@
                             </div>
                         </a>
                     </li>
+                    <!-- Categoory -->
+                    <li class="opcion-con-desplegable">
+                        <a href="{{ route('categoryManager') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                            <div class="flex items-center">
+                                <i class="fas fa-tags mr-2"></i>
+                                <span>Category Management</span>
+                            </div>
+                        </a>
+                    </li>
+
                     <!-- Orders -->
                     <li class="opcion-con-desplegable">
                         <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
