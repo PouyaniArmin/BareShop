@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Routing\Controllers\Middleware;
@@ -63,14 +64,15 @@ Route::middleware(['role:admin,seller'])->group(function () {
     Route::post('/dashboard/products/store', [ProductManagementController::class, 'store'])->name('products.store');
     Route::get('products/{id}/edit', [ProductManagementController::class, 'edit'])->name('products.edit');
     Route::patch('products/update/{id}', [ProductManagementController::class, 'update'])->name('products.update');
-    Route::delete('/products/{product}',[ProductManagementController::class,'destroy'])->name('products.destroy');
+    Route::delete('/products/{product}', [ProductManagementController::class, 'destroy'])->name('products.destroy');
     // categotry
-    Route::get('/dashboard/category',[CategoryController::class,'index'])->name('categoryManager');
-    Route::get('/dashboard/category/create',[CategoryController::class,'create'])->name('category.create');
-    Route::post('/dashboard/category/store',[CategoryController::class,'store'])->name('category.store');
-    Route::get('/dashboard/category/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
-    Route::patch('/dashboard/category/update/{id}',[CategoryController::class,'update'])->name('categories.update');   
-    Route::delete('/dashboard/category/delete/{id}',[CategoryController::class,'destroy'])->name('categories.destroy');
+    Route::get('/dashboard/category', [CategoryController::class, 'index'])->name('categoryManager');
+    Route::get('/dashboard/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/dashboard/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/dashboard/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::patch('/dashboard/category/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/dashboard/category/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::resource('dashboard/order', OrderController::class);
 });
 // logout
 Route::post('/logout', function () {
