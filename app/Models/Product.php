@@ -9,20 +9,34 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','description','price','category_id',
-        'stock','discount','is_active','seller_id',
-      ];
-    public function category(){
+        'name',
+        'description',
+        'price',
+        'category_id',
+        'stock',
+        'discount',
+        'is_active',
+        'seller_id',
+    ];
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
-    public function images(){
+    public function images()
+    {
         return $this->hasMany(ProductImage::class);
     }
-    public function seller(){
-        return $this->belongsTo(User::class,'seller_id');
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
-    public function orders(){
+    public function orders()
+    {
         return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'discount_product');
     }
 }

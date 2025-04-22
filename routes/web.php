@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductManagementController;
@@ -73,6 +74,7 @@ Route::middleware(['role:admin,seller'])->group(function () {
     Route::patch('/dashboard/category/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/dashboard/category/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::resource('dashboard/order', OrderController::class);
+    Route::resource('dashboard/discount',DiscountController::class);
 });
 // logout
 Route::post('/logout', function () {
