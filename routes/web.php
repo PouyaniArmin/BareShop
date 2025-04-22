@@ -7,6 +7,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductManagementController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +75,10 @@ Route::middleware(['role:admin,seller'])->group(function () {
     Route::patch('/dashboard/category/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/dashboard/category/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::resource('dashboard/order', OrderController::class);
-    Route::resource('dashboard/discount',DiscountController::class);
+    Route::resource('dashboard/discount', DiscountController::class);
+    //setting
+    Route::get('dashboard/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::patch('dashboard/settings/update', [SettingController::class, 'update'])->name('settings.update');
 });
 // logout
 Route::post('/logout', function () {
