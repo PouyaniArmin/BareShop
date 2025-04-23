@@ -20,12 +20,15 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'description' => $this->faker->text(),
-            'price' => $this->faker->randomFloat(2, 10, 500),
+            'description' => $this->faker->sentence(),
+            'price' => $this->faker->randomFloat(2, 10, 200),
             'stock' => $this->faker->numberBetween(1, 100),
-            'category_id' => Category::inRandomOrder()->first()?->id ?? Category::factory(),
-            'seller_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'discount' => $this->faker->randomFloat(2, 0, 50),
             'is_active' => $this->faker->boolean(),
+            'category_id' => $this->faker->numberBetween(1, 3),
+            'seller_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
