@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserManagementController;
@@ -79,6 +80,7 @@ Route::middleware(['role:admin,seller'])->group(function () {
     //setting
     Route::get('dashboard/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::patch('dashboard/settings/update', [SettingController::class, 'update'])->name('settings.update');
+    Route::get('dashboard/payments',[PaymentController::class,'index']);
 });
 // logout
 Route::post('/logout', function () {
