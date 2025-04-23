@@ -12,9 +12,8 @@
                 Find the best digital products with special discounts! Don’t miss out, shop now.
             </p>
             <a href="#" class="mt-6 inline-block bg-white text-indigo-700 hover:bg-indigo-600 hover:text-white py-3 px-6 rounded-lg text-lg font-medium transition duration-300 ease-in-out transform hover:scale-105">
-    Explore Products
-</a>
-
+                Explore Products
+            </a>
         </div>
         <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
             <img src="https://source.unsplash.com/500x500/?technology" alt="Digital Product" class="w-80 rounded-lg shadow-lg">
@@ -23,6 +22,7 @@
 </section>
 
 <hr>
+
 <!-- features -->
 <div class="pt-8">
     <h2 class="text-3xl font-bold text-gray-800 text-center mt-8">Our Features</h2>
@@ -73,41 +73,40 @@
     <div class="bg-gradient-to-bl from-blue-50 to-violet-50 flex items-center justify-center lg:h-screen">
         <div class="container mx-auto p-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-                <!-- Replace this with your grid items -->
-                <div class="bg-white rounded-lg border p-4">
-                    <img src="https://placehold.co/300x200/d1d4ff/352cb5.png" alt="Placeholder Image" class="w-full h-48 rounded-md object-cover">
-                    <div class="px-1 py-4">
-                        <div class="font-bold text-xl mb-2">Blog Title</div>
-                        <p class="text-gray-700 text-base">
-                            This is a simple blog card example using Tailwind CSS.
-                        </p>
+                @foreach ($bestProducts as $product)
+                    <div class="bg-white rounded-lg border p-4">
+                        <img src="{{ asset('storage/' .$product->images->first()->image_path )}}" alt="{{ $product->name }}" class="w-full h-48 rounded-md object-cover">
+                        <div class="px-1 py-4">
+                            <div class="font-bold text-xl mb-2">{{ $product->name }}</div>
+                            <p class="text-gray-700 text-base">
+                                {{ $product->description }}
+                            </p>
+                        </div>
+                        <div class="px-1 py-4">
+                            <a href="#" class="text-blue-500 hover:underline">View Details</a>
+                        </div>
                     </div>
-                    <div class="px-1 py-4">
-                        <a href="#" class="text-blue-500 hover:underline">Read More</a>
-                    </div>
-                </div>
-                <!-- Additional grid items -->
+                @endforeach
             </div>
         </div>
     </div>
 </div>
-
 <!-- category -->
-<section class="py-8 bg-gray-100 shadow-lg">
-    <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Featured Categories</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <img src="category1.jpg" alt="Category 1" class="w-20 h-20 object-cover mb-4">
-                <h3 class="text-xl font-semibold">Category Name</h3>
-                <p class="text-gray-500">15 Products</p>
-            </div>
-            <!-- More Categories -->
+<section class="py-12 bg-gray-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-10">Featured Categories</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            @foreach ($categories as $category)
+                <div class="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">{{ $category->name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ $category->products_count }} Products</p>
+                    <p class="text-gray-500 text-sm">{{ Str::limit($category->description, 100) }}</p>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
 <hr>
-
 <!-- newsletter -->
 <div class="pt-10 shadow-lg">
     <div class="p-6 container md:w-2/3 xl:w-auto mx-auto flex flex-col xl:items-stretch justify-between xl:flex-row">

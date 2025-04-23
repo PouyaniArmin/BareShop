@@ -18,7 +18,7 @@ class ProductImageFactory extends Factory
     {
         return [
             'product_id' => $this->faker->numberBetween(1, 50),
-            'image_path' => 'product_images/' . $this->faker->randomElement(['a.png', 'b.png']),
+            'image_path' => 'product_images/' . $this->faker->randomElement(['a.png', 'o.png']),
             'is_primary' => $this->faker->boolean(),
             'created_at' => now(),
             'updated_at' => now(),
