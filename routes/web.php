@@ -19,6 +19,8 @@ Route::get('/products', [HomeController::class, 'products']);
 Route::get('/products/filter', [HomeController::class, 'filteredProducts'])->name('products.filter');
 Route::get('/products/sort/{type}', [HomeController::class, 'sortProducts'])->name('products.sort');
 
+Route::get('/products/{id}', [HomeController::class, 'show'])->name('products.show');
+
 // register & login
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'store']);

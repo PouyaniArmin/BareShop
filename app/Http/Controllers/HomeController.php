@@ -66,4 +66,9 @@ class HomeController extends Controller
 
         return view('products', compact('products', 'categories'));
     }
+    public function show($id){
+        $product=Product::with(['images', 'category', 'seller'])->findOrFail($id);
+
+        return view('showProduct',compact('product'));
+    }
 }
