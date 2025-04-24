@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/products', [HomeController::class, 'products']);
+Route::get('/products/filter', [HomeController::class, 'filteredProducts'])->name('products.filter');
+Route::get('/products/sort/{type}', [HomeController::class, 'sortProducts'])->name('products.sort');
 
 // register & login
 Route::get('/register', [AuthController::class, 'register']);
