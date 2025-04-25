@@ -54,16 +54,20 @@
             </div>
 
             <!-- total + checkout -->
-            <div class="flex items-center justify-between border-t border-gray-100 px-5 py-4">
-                <div class="flex items-center space-x-2 text-xl font-bold">
-                    <span>Total:</span>
-                    <span class="text-blue-600">RM <span x-text="total.toFixed(2)"></span></span>
+            <form method="post" action="{{ route('checkout.page') }}">
+                @csrf
+                <input type="hidden" name="selected" :value="JSON.stringify(selected)" />
+                <div class="flex items-center justify-between border-t border-gray-100 px-5 py-4">
+                    <div class="flex items-center space-x-2 text-xl font-bold">
+                        <span>Total:</span>
+                        <span class="text-blue-600">RM <span x-text="total.toFixed(2)"></span></span>
+                    </div>
+                    <button type="submit"
+                        class="rounded-md bg-blue-600 px-6 py-2 text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                        Checkout
+                    </button>
                 </div>
-                <button
-                    class="rounded-md bg-blue-600 px-6 py-2 text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
-                    Checkout
-                </button>
-            </div>
+            </form>
 
             <!-- hidden input -->
             <div class="flex justify-end">

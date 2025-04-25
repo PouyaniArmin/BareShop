@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomeController;
@@ -24,7 +25,12 @@ Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+// checkout
+Route::post('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
+Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
+Route::get('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
 // register & login
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'store']);
@@ -44,7 +50,7 @@ Route::get('email/verify/{id}/{hash}', function ($id, $hash) {
     if (hash_equals($hash, sha1($user->email))) {
         $user->markEmailAsVerified();
     }
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Home route that requires email verification
