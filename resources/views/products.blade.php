@@ -89,9 +89,12 @@
                         <h4 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{{ $product->name }}</h4>
                         <p class="text-blue-500">${{ $product->price }}</p>
                         <div class="flex gap-2 w-full mt-3">
-                            <button class="w-1/2 px-2 py-1.5 text-sm text-white bg-gray-700 rounded-lg hover:bg-gray-600 transition-all duration-200">
-                                Add to Cart
-                            </button>
+                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="w-1/2">
+                                @csrf
+                                <button type="submit" class="w-full px-2 py-1.5 text-sm text-white bg-gray-700 rounded-lg hover:bg-gray-600 transition-all duration-200">
+                                    Add to Cart
+                                </button>
+                            </form>
                             <a href="{{ route('products.show', $product->id) }}" class="w-1/2 px-2 py-1.5 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-500 transition-all duration-200 text-center">
                                 View
                             </a>

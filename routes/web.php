@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiscountController;
@@ -18,8 +19,11 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/products', [HomeController::class, 'products']);
 Route::get('/products/filter', [HomeController::class, 'filteredProducts'])->name('products.filter');
 Route::get('/products/sort/{type}', [HomeController::class, 'sortProducts'])->name('products.sort');
-
 Route::get('/products/{id}', [HomeController::class, 'show'])->name('products.show');
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
 // register & login
 Route::get('/register', [AuthController::class, 'register']);
@@ -57,8 +61,6 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('rest-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('rest-password', [AuthController::class, 'rest'])->name('password.update');
 // dashboard
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:admin,seller');
-
 Route::middleware(['role:admin,seller'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     // users
