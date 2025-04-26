@@ -7,6 +7,6 @@
     <h2 class="text-4xl font-semibold mb-4">Payment Successful!</h2>
     <p class="text-lg">Your payment has been successfully processed.</p>
     <p class="mt-4">You will receive an email confirmation with your order details shortly.</p>
-    <a href="{{ route('home') }}" class="text-blue-600 mt-6 inline-block">Back to Home</a>
+    <a href="/" class="text-blue-600 mt-6 inline-block">Back to Home</a>
 </div>
 @endsection

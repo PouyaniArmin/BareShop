@@ -21,12 +21,11 @@
       <div class="hidden md:flex w-full justify-between items-center">
         <div class="text-lg font-bold">Logo</div>
         <nav class="flex space-x-4">
-          <a href="#" class="text-gray-700 hover:text-gray-900">Home</a>
-          <a href="#" class="text-gray-700 hover:text-gray-900">Shop</a>
-          <a href="#" class="text-gray-700 hover:text-gray-900">About</a>
+          <a href="/" class="text-gray-700 hover:text-gray-900">Home</a>
+          <a href="/products" class="text-gray-700 hover:text-gray-900">Shop</a>
         </nav>
         <div class="flex space-x-4 items-center">
-          <a href="#" class="text-gray-700 hover:text-gray-900">Account</a>
+          <a href="/login" class="text-gray-700 hover:text-gray-900">Account</a>
           <label for="cartToggle" class="cursor-pointer text-gray-700 hover:text-gray-900">
             <!-- Cart Icon to Open Drawer -->
             <a href="/cart" class="text-gray-600 hover:text-gray-800">
