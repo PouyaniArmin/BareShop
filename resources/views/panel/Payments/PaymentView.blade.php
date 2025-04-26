@@ -25,15 +25,9 @@
           </span>
         </td>
         <td class="py-2 px-4 border-b">{{ ucfirst($payment->method) }}</td>
+        
         <td class="py-2 px-4 border-b">
-          @if($payment->paid_at)
-          {{ $payment->paid_at->format('Y-m-d H:i') }}
-          @else
-          Not Paid Yet
-          @endif
-        </td>
-        <td class="py-2 px-4 border-b">
-          <a href="{{ route('payments.show', $payment->id) }}" class="text-blue-500">View</a>
+          <a href="#" class="text-blue-500">View</a>
         </td>
       </tr>
       @endforeach

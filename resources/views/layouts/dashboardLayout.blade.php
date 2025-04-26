@@ -71,43 +71,45 @@
 
                     <!-- Orders -->
                     <li class="opcion-con-desplegable">
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                        <a href="{{ route('order.index') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
                             <div class="flex items-center">
                                 <i class="fas fa-box mr-2"></i>
                                 <span>Order Management</span>
                             </div>
-                        </div>
+                        </a>
                     </li>
 
                     <!-- Payments -->
                     <li class="opcion-con-desplegable">
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                        <a href="{{ route('payments.index') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
                             <div class="flex items-center">
                                 <i class="fas fa-credit-card mr-2"></i>
                                 <span>Payments</span>
                             </div>
-                        </div>
+                        </a>
                     </li>
 
                     <!-- Discounts -->
+
                     <li class="opcion-con-desplegable">
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                        <a href="{{ route('discount.index') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
                             <div class="flex items-center">
                                 <i class="fas fa-tags mr-2"></i>
                                 <span>Discounts</span>
                             </div>
-                        </div>
+                        </a>
                     </li>
-
                     <!-- Settings -->
                     <li class="opcion-con-desplegable">
-                        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
+                        <a href="{{ route('settings.index') }}" class="flex items-center justify-between p-2 hover:bg-gray-700 rounded">
                             <div class="flex items-center">
                                 <i class="fas fa-cogs mr-2"></i>
                                 <span>Settings</span>
                             </div>
-                        </div>
+                        </a>
                     </li>
+
+                    <!-- logout -->
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

@@ -16,7 +16,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [HomeController::class, 'products']);
 Route::get('/products/filter', [HomeController::class, 'filteredProducts'])->name('products.filter');
 Route::get('/products/sort/{type}', [HomeController::class, 'sortProducts'])->name('products.sort');
@@ -96,7 +96,7 @@ Route::middleware(['role:admin,seller'])->group(function () {
     //setting
     Route::get('dashboard/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::patch('dashboard/settings/update', [SettingController::class, 'update'])->name('settings.update');
-    Route::get('dashboard/payments',[PaymentController::class,'index']);
+    Route::get('dashboard/payments',[PaymentController::class,'index'])->name('payments.index');
 });
 // logout
 Route::post('/logout', function () {
