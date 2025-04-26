@@ -28,6 +28,9 @@ Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 // checkout
 Route::post('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');
 Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('payment/confirm/{orderId}', [CheckoutController::class, 'confirmPayment'])->name('checkout.confirm');
+Route::post('payment/confirm/{orderId}', [CheckoutController::class, 'confirmPaymentStore'])->name('checkoutPayment.store');
+
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::get('/checkout', [CheckoutController::class, 'checkoutPage'])->name('checkout.page');

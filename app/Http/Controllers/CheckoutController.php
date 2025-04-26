@@ -67,6 +67,27 @@ class CheckoutController extends Controller
 
         session()->forget('cart');
 
+        return redirect()->route('checkout.confirm', ['orderId' => $order->id]);
+    }
+    public function confirmPayment($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        return view('payment-confirmation', compact('order'));
+    }
+    
+    public function confirmPaymentStore($orderId){
+        $order = Order::findOrFail($orderId);
+        $order->status = 'paid';
+        $order->save();
+        Payment::create([
+            'order_id' => $order->id,
+            'amount' => $order->total_price,
+            'status' => 'completed',
+            'method' => $order->payment_method,
+            'transaction_id' => 'some-transaction-id', 
+            'paid_at' => now(),
+        ]);
         return redirect()->route('checkout.success');
     }
     public function success()
